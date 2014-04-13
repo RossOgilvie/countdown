@@ -1,0 +1,106 @@
+<html>
+<head><title>Countdown!</title>
+<script>
+var end = new Date('04/27/2014 6:10 AM');
+
+var _second = 1000;
+var _minute = _second * 60;
+var _hour = _minute * 60;
+var _day = _hour * 24;
+var timer;
+
+function showRemaining() {
+	var now = new Date();
+	var distance = end - now;
+	if (distance < 0) {
+
+	    clearInterval(timer);
+	    document.getElementById('countdown').innerHTML = 'ARRIVED!';
+
+	    return;
+	}
+
+	var days = Math.floor(distance / _day);
+	var hours = Math.floor((distance % _day) / _hour);
+	var minutes = Math.floor((distance % _hour) / _minute);
+	var seconds = Math.floor((distance % _minute) / _second);
+
+	document.getElementById('countdown').innerHTML = days + 'days ';
+	document.getElementById('countdown').innerHTML += hours + 'hrs ';
+	document.getElementById('countdown').innerHTML += minutes + 'mins ';
+	document.getElementById('countdown').innerHTML += seconds + 'secs';
+}
+timer = setInterval(showRemaining, 1000);
+
+
+
+var yt_front = '<iframe width="560" height="315" src="http://www.youtube.com/embed/';
+var yt_back = '?rel=0" frameborder="0" allowfullscreen></iframe>';
+var videos = new Array();
+//harmony to my heartbeat
+videos[13] = "_AspK7lSaE8";
+//chairlift - arms
+videos[12] = "uxcPupyxyGs";
+// dance wiv me
+videos[11] = "c2MiyZx8MTY";
+//joco - drinking with you
+videos[10] = "SgXMF9s5RDM";
+//friends - im his girl
+videos[9] = "O5VNumNJyqE";
+//beachwood sparks - by your side
+videos[8] = "cuia6EgqxVE";
+//vampire weekend - unbelievers
+videos[7] = "2_qKmTLbEPc";
+//xx - angels
+videos[6] = "PYnZqYCdJ-I";
+// dd - radar detector
+videos[5] = "8pbdLqTh_x4";
+// gay bar
+videos[4] = "ulPgWVC08KI";
+//most beautiful girl in the room
+videos[3] = "9jLDZjMF3tk";
+// fall right in - beach fossils
+videos[2] = "mxJFjjGtZU8";
+//trampoline
+videos[1] = "ZfvuaAC1IpU";
+//norah jones - turn me on
+videos[0] = "ED1B39W9b0E";
+
+
+function setVideo() {
+	var now = new Date();
+	var distance = end - now;
+	var days = Math.floor(distance / _day);
+	if(days < 0) { days = 0; }
+	document.getElementById('vid').innerHTML = yt_front + videos[days] + yt_back;
+}
+</script>
+<style type="text/css">
+body {
+	background-image: url(PA021017.JPG);
+	background-position: top center;
+}
+
+#content {
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 200px;
+	text-align: center;
+}
+
+#countdown {
+	color: white;
+	font-weight: bold;
+	font-size: 32px;
+}
+</style>
+</head>
+<body onLoad="setVideo();">
+<div id="content">
+<div id="countdown"> </div>
+<p/>
+<div id="vid"> </div>
+</div>
+</body>
+</html>
