@@ -1,15 +1,46 @@
 <html>
 <head><title>Countdown!</title>
 <script>
-var end = new Date('04/27/2014 6:10 AM');
-
+// time constants
 var _second = 1000;
 var _minute = _second * 60;
 var _hour = _minute * 60;
 var _day = _hour * 24;
-var timer;
 
-function showRemaining() {
+var end = new Date('04/27/2014 6:10 AM');
+var remaingTot = end - (new Date());
+var remaining = Math.floor(remaingTot / _day);
+if(remaining < 0) { remaining = 0; }
+
+var current = remaining;
+
+
+function setVideo() {
+	// don't let alice advance beyond the most recent day.
+	if(current >= remaining)
+	{
+		//also, don't let it go out of bounds too high
+		if(current <= 13) {
+		document.getElementById('vid').innerHTML = yt_front + videos[current] + yt_back;
+		} else {
+			current = 13;
+		}
+	} else {
+		current = remaining;
+	}
+}
+
+function forward(){
+	current--;
+	setVideo();
+}
+function back(){
+	current++;
+	setVideo();
+}
+
+
+function showCountdown() {
 	var now = new Date();
 	var distance = end - now;
 	if (distance < 0) {
@@ -30,7 +61,7 @@ function showRemaining() {
 	document.getElementById('countdown').innerHTML += minutes + 'mins ';
 	document.getElementById('countdown').innerHTML += seconds + 'secs';
 }
-timer = setInterval(showRemaining, 1000);
+var timer = setInterval(showCountdown, 1000);
 
 
 
@@ -66,14 +97,6 @@ videos[1] = "ZfvuaAC1IpU";
 //norah jones - turn me on
 videos[0] = "ED1B39W9b0E";
 
-
-function setVideo() {
-	var now = new Date();
-	var distance = end - now;
-	var days = Math.floor(distance / _day);
-	if(days < 0) { days = 0; }
-	document.getElementById('vid').innerHTML = yt_front + videos[days] + yt_back;
-}
 </script>
 <style type="text/css">
 body {
@@ -94,6 +117,13 @@ body {
 	font-weight: bold;
 	font-size: 32px;
 }
+
+#arrow {
+	background-color: white;
+	border-radius: 10px;
+	width: 128px;
+	opacity: 0.5;
+}
 </style>
 </head>
 <body onLoad="setVideo();">
@@ -101,6 +131,9 @@ body {
 <div id="countdown"> </div>
 <p/>
 <div id="vid"> </div>
+<p/>
+<img id="arrow" src="back.png" onClick="back();"/>
+<img id="arrow" src="forward.png" onClick="forward();"/>
 </div>
 </body>
 </html>
